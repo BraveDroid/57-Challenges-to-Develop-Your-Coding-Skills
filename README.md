@@ -9,7 +9,7 @@ ISBN: 978-1-68050-122-3
 ------------
 
 
-![](http://imagery.pragprog.com/products/461/bhwb.jpg?1454000572)
+![](https://github.com/BraveDroid/57-Challenges-to-Develop-Your-Coding-Skills/blob/master/cover.jpg)
 
 ------------
 ## Introduction:
