@@ -9,7 +9,7 @@ ISBN: 978-1-68050-122-3
 ------------
 
 
-![alt text](https://imagery.pragprog.com/products/461/bhwb.jpg?1454000572)
+![](http://imagery.pragprog.com/products/461/bhwb.jpg?1454000572)
 
 ------------
 ## Introduction:
