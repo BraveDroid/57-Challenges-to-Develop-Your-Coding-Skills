@@ -2,7 +2,12 @@ package com.bravedroid.passive_way.presentation;
 
 import com.bravedroid.passive_way.applicatiion.GreetingAdder;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class Presenter {
+    private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     private GreetingAdder greetingAdder;
     private String name;
 
@@ -10,12 +15,13 @@ public class Presenter {
         this.greetingAdder = greetingAdder;
     }
 
-    public void promptUserName() {
-// TODO: 21/07/2018 update the name
+    public void promptUserName() throws IOException {
+        System.out.println("Whats your name");
+        name = input.readLine();
     }
 
     public void printGreetingForUser() {
         String greeting = greetingAdder.addGreeting(name);
-        // TODO: 21/07/2018 show the greeting
+        System.out.println(greeting);
     }
 }
