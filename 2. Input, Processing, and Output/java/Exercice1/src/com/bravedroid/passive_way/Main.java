@@ -1,0 +1,16 @@
+package com.bravedroid.passive_way;
+
+import com.bravedroid.passive_way.applicatiion.GreetingAdder;
+import com.bravedroid.passive_way.presentation.Presenter;
+
+public class Main {
+
+    public static void main(String[] args) {
+        GreetingAdder greetingAdder = new GreetingAdder();
+
+        Presenter presenter=new Presenter(greetingAdder);
+
+        presenter.promptUserName();
+        presenter.printGreetingForUser();
+    }
+}
