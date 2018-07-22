@@ -20,8 +20,14 @@ public class Presenter {
         name = input.readLine();
     }
 
-    public void printGreetingForUser() {
-        String greeting = greetingAdder.addGreeting(name);
-        System.out.println(greeting);
+    public void printGreetingForUser() throws IOException {
+        try {
+            String greeting = greetingAdder.addGreeting(name);
+            System.out.println(greeting);
+        } catch (IllegalArgumentException e) {
+            System.out.println("please provide non impty name");
+            promptUserName();
+            printGreetingForUser();
+        }
     }
 }
