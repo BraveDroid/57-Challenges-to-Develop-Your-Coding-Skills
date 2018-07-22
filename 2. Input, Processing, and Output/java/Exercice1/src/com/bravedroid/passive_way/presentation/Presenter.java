@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Presenter {
+    private int tryCount = 0;
     private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     private GreetingAdder greetingAdder;
     private String name;
@@ -25,9 +26,13 @@ public class Presenter {
             String greeting = greetingAdder.addGreeting(name);
             System.out.println(greeting);
         } catch (IllegalArgumentException e) {
-            System.out.println("please provide non impty name");
-            promptUserName();
-            printGreetingForUser();
+            tryCount++;
+            if (tryCount < 3) {
+                System.out.println("please provide non impty name");
+                promptUserName();
+                printGreetingForUser();
+            }
         }
     }
 }
+
