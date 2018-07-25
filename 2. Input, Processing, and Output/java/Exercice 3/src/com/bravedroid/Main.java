@@ -9,7 +9,7 @@ import com.bravedroid.printing_quotes.business.QuotesAdder;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         Repository quoteDal = new QuoteDal();
         //Repository quoteDal2 = new QuoteDal2();
         QuotesAdder quotesAdder = new QuotesAdder(quoteDal);

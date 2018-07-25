@@ -14,7 +14,7 @@ public class Presenter {
         this.quotesAdder = quotesAdder;
     }
 
-    public void printQuotes() throws IOException {
+    public void printQuotes() throws Exception {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("What is the quote?");
         String quotesText = input.readLine();
