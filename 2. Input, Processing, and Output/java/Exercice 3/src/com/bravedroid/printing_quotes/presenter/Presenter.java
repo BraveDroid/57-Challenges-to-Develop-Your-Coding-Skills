@@ -1,6 +1,5 @@
 package com.bravedroid.printing_quotes.presenter;
 
-import com.bravedroid.printing_quotes.dal.QuoteDal;
 import com.bravedroid.printing_quotes.business.QuotesAdder;
 
 import java.io.BufferedReader;
@@ -9,11 +8,9 @@ import java.io.InputStreamReader;
 
 public class Presenter {
     private QuotesAdder quotesAdder;
-
     public Presenter(QuotesAdder quotesAdder) {
         this.quotesAdder = quotesAdder;
     }
-
     public void printQuotes() throws Exception {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("What is the quote?");
