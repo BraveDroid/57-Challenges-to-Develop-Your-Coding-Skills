@@ -6,8 +6,9 @@ import java.io.IOException;
 
 public class QuoteDal2 implements Repository {
     @Override
-    public void storeQuote(String quotes) throws IOException {
+    public boolean storeQuote(String quotes) throws IOException {
         //DB dabase =new DataBase()
         //dabase.store(quotes)
+        return true;
     }
 }

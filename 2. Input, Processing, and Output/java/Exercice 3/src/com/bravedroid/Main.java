@@ -1,12 +1,9 @@
 package com.bravedroid;
 
-import com.bravedroid.printing_quotes.business.Repository;
-import com.bravedroid.printing_quotes.dal.QuoteDal2;
-import com.bravedroid.printing_quotes.presenter.Presenter;
-import com.bravedroid.printing_quotes.dal.QuoteDal;
 import com.bravedroid.printing_quotes.business.QuotesAdder;
-
-import java.io.IOException;
+import com.bravedroid.printing_quotes.business.Repository;
+import com.bravedroid.printing_quotes.dal.QuoteDal;
+import com.bravedroid.printing_quotes.presenter.Presenter;
 
 public class Main {
     public static void main(String[] args) throws Exception {
