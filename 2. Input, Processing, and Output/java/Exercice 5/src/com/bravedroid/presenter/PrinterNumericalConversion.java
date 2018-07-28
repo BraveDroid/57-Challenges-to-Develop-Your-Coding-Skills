@@ -8,18 +8,23 @@ import java.io.InputStreamReader;
 
 public class PrinterNumericalConversion {
     private ConversionAdder conversionAdder;
+    private String conversion;
+    private String firstNumAsString;
+    private String secondNumAsString;
 
     public PrinterNumericalConversion(ConversionAdder conversionAdder) {
         this.conversionAdder = conversionAdder;
     }
 
-    public void printNumericalConversions() throws IOException {
+    public void provideInput() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("What is the first number?");
-        String firstNumAsString = input.readLine();
+        firstNumAsString = input.readLine();
         System.out.println("What is the second number?");
-        String secondNumAsString = input.readLine();
-        String conversion;
+        secondNumAsString = input.readLine();
+    }
+
+    public void printNumericalConversions() {
         try {
             conversion = conversionAdder.addConversion(
                     Integer.parseInt(firstNumAsString),
@@ -27,9 +32,9 @@ public class PrinterNumericalConversion {
             );
         } catch (NumberFormatException ex) {
             System.out.println(" the value entered is not numeric.");
-            return;
         }
-       // if (null != conversion)
+        if (conversion != null) {
             System.out.println(conversion);
+        }
     }
 }
