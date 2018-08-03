@@ -6,11 +6,11 @@ import com.bravedroid.presenter.PizzaPartyPrinter;
 import java.io.IOException;
 
 public class Main {
-
     public static void main(String[] args) throws IOException {
         PizzaPartyCalculator pizzaPartyCalculator = new PizzaPartyCalculator();
         PizzaPartyPrinter pizzaPartyPrinter = new PizzaPartyPrinter(pizzaPartyCalculator);
-        pizzaPartyPrinter.provideNumberPersonAndPizza();
+        pizzaPartyPrinter.readNumberPerson();
+        pizzaPartyPrinter.readNumberPizza();
         pizzaPartyPrinter.printPizzaParty();
     }
 }

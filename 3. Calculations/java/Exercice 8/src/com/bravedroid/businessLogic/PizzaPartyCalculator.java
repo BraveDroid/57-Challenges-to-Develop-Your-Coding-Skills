@@ -1,21 +1,14 @@
 package com.bravedroid.businessLogic;
 
+import com.bravedroid.model.PizzaPartyVM;
+
 public class PizzaPartyCalculator {
-    public int calculateAllPizzaSlices(int numberPizza) {
-        return numberPizza * 8;
-    }
+    private static final int SLICE_PER_PIZZA = 8;
 
-    public int calculatePiecesOfPizzaPerPerson(int numberOfPerson, int allPizzaSlices) {
-        return allPizzaSlices / numberOfPerson;
-    }
-
-    public int calculateLeftoverPieces(int piecesOfPizzaPerPerson, int allPizzaSlices, int numberOfPerson) {
-        int leftOverPieces = allPizzaSlices - (piecesOfPizzaPerPerson * numberOfPerson);
-        if (leftOverPieces < 1) {
-            return 0;
-        } else {
-            return leftOverPieces;
-        }
+    public PizzaPartyVM calculatePartitions(int numberOfPizza, int numberOfPerson) {
+        PizzaPartyVM vm = new PizzaPartyVM();
+        vm.setPiecesOfPizzaPerPerson(numberOfPizza * SLICE_PER_PIZZA / numberOfPerson);
+        vm.setLeftoverPieces(numberOfPizza * SLICE_PER_PIZZA % numberOfPerson);
+        return vm;
     }
 }
-
