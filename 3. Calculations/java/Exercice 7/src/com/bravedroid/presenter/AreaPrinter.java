@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 
 public class AreaPrinter {
-
     private String lengthInFeetString;
     private String widthInFeetString;
     private AreaCalculator areaCalculator;
@@ -17,7 +16,7 @@ public class AreaPrinter {
         this.areaCalculator = areaCalculator;
     }
 
-    public void provideSizes() throws IOException {
+    public void readSizes() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("What is the length of the room in feet?");
         lengthInFeetString = input.readLine();
@@ -27,31 +26,30 @@ public class AreaPrinter {
 
     public void printArea() {
         final double conversion = 0.09290304;
-        int lengthInFeet;
-        int widthInFeet;
+        double lengthInFeet;
+        double widthInFeet;
         try {
-            lengthInFeet = Integer.parseInt(lengthInFeetString);
-            widthInFeet = Integer.parseInt(widthInFeetString);
+            lengthInFeet = Double.parseDouble(lengthInFeetString);
+            widthInFeet = Double.parseDouble(widthInFeetString);
 
         } catch (NumberFormatException ex) {
             System.out.println(" the value entered is not numeric !!!");
             return;
         }
 
-        if (lengthInFeet < 1 || widthInFeet < 1) {
+        if (lengthInFeet < 0 || widthInFeet < 0) {
             System.out.println("your inputs are not valid !!! ");
             return;
         }
         System.out.println("You entered dimensions of " + lengthInFeet + " feet by " + widthInFeet + " feet.");
         System.out.println("The area is : ");
 
-        int areaInFeet = areaCalculator.calculateAreaInFeet(lengthInFeet, widthInFeet);
+        double areaInFeet = areaCalculator.calculateAreaInFeet(lengthInFeet, widthInFeet);
+        areaInFeet = Double.parseDouble(new DecimalFormat("##.###").format(areaInFeet));
         System.out.println(areaInFeet + " square feet");
 
         double areaInMeters = areaCalculator.calculateAreaInMeters(areaInFeet, conversion);
-        areaInMeters =Double.parseDouble(new DecimalFormat("##.###").format(areaInMeters));
+        areaInMeters = Double.parseDouble(new DecimalFormat("##.###").format(areaInMeters));
         System.out.println(areaInMeters + " square meters");
-
     }
 }
-

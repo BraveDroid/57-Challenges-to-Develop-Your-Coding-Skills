@@ -17,17 +17,18 @@ public class AreaCalculatorTest {
     @Test
     public void calculateAreaInFeet_correctInput_areaInFeetReturned() {
         //when
-        int resultReturned = SUT.calculateAreaInFeet(20, 3);
-        int expectedResult = 60;
+        double resultReturned = SUT.calculateAreaInFeet(0.2, 40.2);
+        double expectedResult = 8.04;
         //then
-        assertEquals(expectedResult, resultReturned);
+        double delta = 0.001;
+        assertEquals(expectedResult, resultReturned, delta);
     }
 
     @Test
-    public void calculateAreaInMeters_correctInput_areaInMeteresReturnde() {
+    public void calculateAreaInMeters_correctInput_areaInMeteresReturned() {
         //when
-        double resultReturned = SUT.calculateAreaInMeters(60, 0.09290304);
-        double expectedResult = 5.574;
+        double resultReturned = SUT.calculateAreaInMeters(8.04, 0.09290304);
+        double expectedResult = 0.747;
         //then
         double delta = 0.001;
         assertEquals(expectedResult, resultReturned, delta);
