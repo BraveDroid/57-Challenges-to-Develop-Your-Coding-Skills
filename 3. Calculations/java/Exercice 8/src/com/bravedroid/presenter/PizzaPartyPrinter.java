@@ -64,8 +64,6 @@ public class PizzaPartyPrinter {
 
     public void printPizzaParty() {
         if (mustExit) return;
-        if (numberOfPizza == 0 || numberOfPerson == 0)
-            return;
 
         PizzaPartyVM vm = pizzaPartyCalculator.calculatePartitions(numberOfPizza, numberOfPerson);
         int piecesOfPizzaPerPerson = vm.getPiecesOfPizzaPerPerson();
