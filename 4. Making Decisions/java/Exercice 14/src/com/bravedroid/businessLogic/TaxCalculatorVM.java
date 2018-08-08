@@ -34,7 +34,6 @@ public class TaxCalculatorVM {
         return (other instanceof TaxCalculatorVM) &&
                 this.subtotal == ((TaxCalculatorVM) other).getSubtotal() &&
                 this.tax == ((TaxCalculatorVM) other).getTax() &&
-                this.total == ((TaxCalculatorVM) other).getTotal()
-                ;
+                this.total == ((TaxCalculatorVM) other).getTotal();
     }
 }
