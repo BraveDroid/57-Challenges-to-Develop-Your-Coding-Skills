@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 
 public class LegalDrivingAgePrinter {
     private static final String ERROR_MESSAGE_NOT_NUMERIC_INPUT = " the value entered is not numeric or not an integer.";
-
     private int age;
     private BufferedReader input;
     private boolean mustExit;
@@ -37,7 +36,8 @@ public class LegalDrivingAgePrinter {
     public void printLegalDrivingAge() {
         if (mustExit) return;
         final String messageToPrint;
-        boolean isLegalDriveAge = age > 1;
+        final int legalDriveAge = 16;
+        final boolean isLegalDriveAge = age > legalDriveAge;
         final String outputLegalDriveAge = "You are old enough to legally drive.";
         final String outputIllegalDriveAge = "You are not old enough to legally drive.";
         messageToPrint = (isLegalDriveAge) ? outputLegalDriveAge : outputIllegalDriveAge;
