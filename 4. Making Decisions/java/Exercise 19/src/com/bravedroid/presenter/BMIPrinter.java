@@ -65,12 +65,12 @@ public class BMIPrinter {
 
     public void printBMI() {
         if (mustExit) return;
-        double BMI = bmiCalculator.calculateBMI(weightInPounds, heightInInches);
-        boolean condition = 25 > BMI && BMI > 18.5;
-        BMI = Double.parseDouble(new DecimalFormat("##.##").format(BMI));
-        String outputInNormalWeight = "Your BMI is " + BMI + "\n"
+        double bmi = bmiCalculator.calculateBMI(weightInPounds, heightInInches);
+        boolean condition = 25 > bmi && bmi > 18.5;
+        bmi = Double.parseDouble(new DecimalFormat("##.##").format(bmi));
+        String outputInNormalWeight = "Your bmi is " + bmi + "\n"
                 + "You are within the ideal weight range.";
-        String outputInOverWeight = "Your BMI is " + BMI + "." + "\n"
+        String outputInOverWeight = "Your bmi is " + bmi + "." + "\n"
                 + "You are overweight. You should see your doctor.";
         String output = (condition) ? outputInNormalWeight : outputInOverWeight;
         System.out.println(output);

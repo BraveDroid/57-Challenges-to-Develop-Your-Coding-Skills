@@ -2,6 +2,7 @@ package com.bravedroid.businesslogic;
 
 public class BMICalculator {
     public double calculateBMI(double weight, double height) {
-        return (weight / (height * height)) * 703;
+        final int MYSTERIOUS_NUMBER = 703;
+        return (weight / (height * height)) * MYSTERIOUS_NUMBER;
     }
 }
