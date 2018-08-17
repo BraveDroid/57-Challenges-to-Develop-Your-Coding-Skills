@@ -7,7 +7,6 @@ import com.bravedroid.businesslogic.util.NumberFormatHelper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.DecimalFormat;
 
 public class MultiStateSalesTaxPrinter {
     private static final String REQUEST_MESSAGE_ORDER_AMOUNT = "What is the order amount?";
@@ -92,18 +91,15 @@ public class MultiStateSalesTaxPrinter {
                     case "EAU CLAIRE":
                         double totalInEauClaire = vm.getTaxInEauClaire() + orderAmount;
                         totalInEauClaire = nHelper.formatNumberToTheNearestCent(totalInEauClaire);
-                        totalInEauClaire = Double.parseDouble(new DecimalFormat("##.###").format(totalInEauClaire));
                         System.out.println("The tax is $" + vm.getTaxInEauClaire() + "." + "\n" + "The total is $" + totalInEauClaire + ".");
                         break;
                     case "DUNN":
                         double totalInDunn = vm.getTaxInDunn() + orderAmount;
                         totalInDunn = nHelper.formatNumberToTheNearestCent(totalInDunn);
-                        totalInDunn = Double.parseDouble(new DecimalFormat("##.###").format(totalInDunn));
                         System.out.println("The tax is $" + vm.getTaxInDunn() + "." + "\n" + "The total is $" + totalInDunn + ".");
                         break;
                     default:
                         double totalInWisconsin = vm.getTaxInWisconsin() + orderAmount;
-                        totalInWisconsin = Double.parseDouble(new DecimalFormat("##.###").format(totalInWisconsin));
                         totalInWisconsin = nHelper.formatNumberToTheNearestCent(totalInWisconsin);
                         System.out.println("The tax is $" + vm.getTaxInWisconsin() + "\n" + "The total is $" + totalInWisconsin + ".");
                         break;
@@ -112,7 +108,6 @@ public class MultiStateSalesTaxPrinter {
             case "ILLINOIS":
                 double totalInIllinois = vm.getTaxInIllinois() + orderAmount;
                 totalInIllinois = nHelper.formatNumberToTheNearestCent(totalInIllinois);
-                totalInIllinois = Double.parseDouble(new DecimalFormat("##.###").format(totalInIllinois));
                 System.out.println("The tax is $" + vm.getTaxInIllinois() + "." + "\n" + "The total is $" + totalInIllinois + ".");
                 break;
             default:
