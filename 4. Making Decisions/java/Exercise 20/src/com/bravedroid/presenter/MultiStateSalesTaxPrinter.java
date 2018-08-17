@@ -2,6 +2,7 @@ package com.bravedroid.presenter;
 
 import com.bravedroid.businesslogic.MultiStateSalesTaxCalculator;
 import com.bravedroid.businesslogic.MultiStateSalesTaxCalculatorVM;
+import com.bravedroid.businesslogic.util.NumberFormatHelper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,10 +11,9 @@ import java.text.DecimalFormat;
 
 public class MultiStateSalesTaxPrinter {
     private static final String REQUEST_MESSAGE_ORDER_AMOUNT = "What is the order amount?";
-    private static final String ERROR_MESSAGE_NOT_NUMERIC_INPUT = " the value entered is not numeric or not an integer.";
     private static final String REQUEST_MESSAGE_STATE = "What state do you live in?";
     private static final String REQUEST_MESSAGE_COUNTRY = "What Country do you live in?";
-
+    private static final String ERROR_MESSAGE_NOT_NUMERIC_INPUT = " the value entered is not numeric or not an integer.";
 
     private double orderAmount;
     private String state;
@@ -21,10 +21,12 @@ public class MultiStateSalesTaxPrinter {
     private boolean mustExit;
     private BufferedReader input;
     private MultiStateSalesTaxCalculator multiStateSalesTaxCalculator;
+    private NumberFormatHelper nHelper;
 
     public MultiStateSalesTaxPrinter(MultiStateSalesTaxCalculator multiStateSalesTaxCalculator) {
         input = new BufferedReader(new InputStreamReader(System.in));
         this.multiStateSalesTaxCalculator = multiStateSalesTaxCalculator;
+        nHelper = new NumberFormatHelper();
     }
 
     public void readOrderAmount() throws IOException {
@@ -71,6 +73,8 @@ public class MultiStateSalesTaxPrinter {
                 mustExit = true;
                 return;
             }
+        } else {
+            return;
         }
         boolean hasCountryUpperCase = !country.equals(country.toUpperCase());
         if (hasCountryUpperCase) {
@@ -82,28 +86,38 @@ public class MultiStateSalesTaxPrinter {
     public void printMultiStateSalesTax() {
         if (mustExit) return;
         MultiStateSalesTaxCalculatorVM vm = multiStateSalesTaxCalculator.calculateMultiStateSaleTax(orderAmount);
-        if (state.equals("WISCONSIN") && country.equals("WISCONSIN")) {
-            double totalInWisconsin = vm.getTaxInWisconsin() + orderAmount;
-            totalInWisconsin = Double.parseDouble(new DecimalFormat("##.###").format(totalInWisconsin));
-            System.out.println("The tax is $" + vm.getTaxInWisconsin() + "\n"
-                    + "The total is $" + totalInWisconsin + ".");
-        } else if (state.equals("WISCONSIN") && country.equals("EAU CLAIRE")) {
-            double totalInEauClaire = vm.getTaxInEauClaire() + orderAmount;
-            totalInEauClaire = Double.parseDouble(new DecimalFormat("##.###").format(totalInEauClaire));
-            System.out.println("The tax is $" + vm.getTaxInEauClaire() + "." + "\n"
-                    + "The total is $" + totalInEauClaire + ".");
-        } else if (state.equals("WISCONSIN") && country.equals("DUNN")) {
-            double totalInDunn = vm.getTaxInDunn() + orderAmount;
-            totalInDunn = Double.parseDouble(new DecimalFormat("##.###").format(totalInDunn));
-            System.out.println("The tax is $" + vm.getTaxInDunn() + "." + "\n"
-                    + "The total is $" + totalInDunn + ".");
-        } else if (state.equals("ILLINOIS")) {
-            double totalInIllinois = vm.getTaxInIllinois() + orderAmount;
-            totalInIllinois = Double.parseDouble(new DecimalFormat("##.###").format(totalInIllinois));
-            System.out.println("The tax is $" + vm.getTaxInIllinois() + "." + "\n"
-                    + "The total is $" + totalInIllinois + ".");
-        } else {
-            System.out.println("The total is $" + vm.getTaxInOtherState());
+        switch (state) {
+            case "WISCONSIN":
+                switch (country) {
+                    case "EAU CLAIRE":
+                        double totalInEauClaire = vm.getTaxInEauClaire() + orderAmount;
+                        totalInEauClaire = nHelper.formatNumberToTheNearestCent(totalInEauClaire);
+                        totalInEauClaire = Double.parseDouble(new DecimalFormat("##.###").format(totalInEauClaire));
+                        System.out.println("The tax is $" + vm.getTaxInEauClaire() + "." + "\n" + "The total is $" + totalInEauClaire + ".");
+                        break;
+                    case "DUNN":
+                        double totalInDunn = vm.getTaxInDunn() + orderAmount;
+                        totalInDunn = nHelper.formatNumberToTheNearestCent(totalInDunn);
+                        totalInDunn = Double.parseDouble(new DecimalFormat("##.###").format(totalInDunn));
+                        System.out.println("The tax is $" + vm.getTaxInDunn() + "." + "\n" + "The total is $" + totalInDunn + ".");
+                        break;
+                    default:
+                        double totalInWisconsin = vm.getTaxInWisconsin() + orderAmount;
+                        totalInWisconsin = Double.parseDouble(new DecimalFormat("##.###").format(totalInWisconsin));
+                        totalInWisconsin = nHelper.formatNumberToTheNearestCent(totalInWisconsin);
+                        System.out.println("The tax is $" + vm.getTaxInWisconsin() + "\n" + "The total is $" + totalInWisconsin + ".");
+                        break;
+                }
+                break;
+            case "ILLINOIS":
+                double totalInIllinois = vm.getTaxInIllinois() + orderAmount;
+                totalInIllinois = nHelper.formatNumberToTheNearestCent(totalInIllinois);
+                totalInIllinois = Double.parseDouble(new DecimalFormat("##.###").format(totalInIllinois));
+                System.out.println("The tax is $" + vm.getTaxInIllinois() + "." + "\n" + "The total is $" + totalInIllinois + ".");
+                break;
+            default:
+                System.out.println("The total is $" + vm.getTaxInOtherState());
+                break;
         }
     }
 

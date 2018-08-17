@@ -1,11 +1,14 @@
 package com.bravedroid.businesslogic;
 
+import com.bravedroid.businesslogic.util.NumberFormatHelper;
+
 public class MultiStateSalesTaxCalculatorVM {
+    private NumberFormatHelper numberFormatHelper = new NumberFormatHelper();
     private double taxInWisconsin;
     private double taxInEauClaire;
     private double taxInDunn;
     private double taxInIllinois;
-    private double TaxInOtherState;
+    private double taxInOtherState;
 
     public double getTaxInWisconsin() {
         return taxInWisconsin;
@@ -16,7 +19,7 @@ public class MultiStateSalesTaxCalculatorVM {
     }
 
     public double getTaxInEauClaire() {
-        return taxInEauClaire;
+        return numberFormatHelper.formatNumberToTheNearestCent(taxInEauClaire);
     }
 
     public void setTaxInEauClaire(double taxInEauClaire) {
@@ -24,7 +27,7 @@ public class MultiStateSalesTaxCalculatorVM {
     }
 
     public double getTaxInDunn() {
-        return taxInDunn;
+        return numberFormatHelper.formatNumberToTheNearestCent(taxInDunn);
     }
 
     public void setTaxInDunn(double taxInDunn) {
@@ -32,7 +35,7 @@ public class MultiStateSalesTaxCalculatorVM {
     }
 
     public double getTaxInIllinois() {
-        return taxInIllinois;
+        return numberFormatHelper.formatNumberToTheNearestCent(taxInIllinois);
     }
 
     public void setTaxInIllinois(double taxInIllinois) {
@@ -40,10 +43,10 @@ public class MultiStateSalesTaxCalculatorVM {
     }
 
     public double getTaxInOtherState() {
-        return TaxInOtherState;
+        return numberFormatHelper.formatNumberToTheNearestCent(taxInOtherState);
     }
 
     public void setTaxInOtherState(double taxInOtherState) {
-        TaxInOtherState = taxInOtherState;
+        this.taxInOtherState = taxInOtherState;
     }
 }
