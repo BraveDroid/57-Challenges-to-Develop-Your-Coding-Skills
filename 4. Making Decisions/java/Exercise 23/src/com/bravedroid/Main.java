@@ -6,8 +6,8 @@ import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        TroubleshootingCarIssuesPrinter troubleshootingCarIssuesPrinter = new TroubleshootingCarIssuesPrinter();
-        troubleshootingCarIssuesPrinter.printTroubleshootingCarIssues();
-    }
+  public static void main(String[] args) throws IOException {
+    TroubleshootingCarIssuesPrinter troubleshootingCarIssuesPrinter = new TroubleshootingCarIssuesPrinter();
+    troubleshootingCarIssuesPrinter.printTroubleshootingCarIssues();
+  }
 }
