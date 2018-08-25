@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class TroubleshootingCarIssuesPrinter {
+  private static final String YES = "yes";
+  private static final String NO = "no";
+  
   private String CarSilent;
   private String batteryCorroded;
   private String carNoise;
@@ -21,14 +24,14 @@ public class TroubleshootingCarIssuesPrinter {
 
   public void printTroubleshootingCarIssues() throws IOException {
     readCarSilent();
-    final boolean isCarSilent = CarSilent.equalsIgnoreCase("yes");
+    final boolean isCarSilent = CarSilent.equalsIgnoreCase(YES);
     if (isCarSilent) {
       readBatteryCorroded();
-      final boolean isBatteryCorroded = batteryCorroded.equalsIgnoreCase("yes");
+      final boolean isBatteryCorroded = batteryCorroded.equalsIgnoreCase(YES);
       treatBatteryCorroded(isBatteryCorroded);
     } else {
       readCareNoise();
-      final boolean hasNoise = carNoise.equalsIgnoreCase("yes");
+      final boolean hasNoise = carNoise.equalsIgnoreCase(YES);
       treatCarHasNoise(hasNoise);
     }
   }
@@ -46,7 +49,7 @@ public class TroubleshootingCarIssuesPrinter {
       System.out.println("Replace the battery");
     } else {
       readCarCrankUp();
-      final boolean isCarCrankUp = carCrankUp.equalsIgnoreCase("yes");
+      final boolean isCarCrankUp = carCrankUp.equalsIgnoreCase(YES);
       treatCarCrankUp(isCarCrankUp);
     }
   }
@@ -56,10 +59,10 @@ public class TroubleshootingCarIssuesPrinter {
       System.out.println("Check spark plug connections. ");
     } else {
       readEngineState();
-      final boolean doesEngineStartAndDie = engineStartAndDie.equalsIgnoreCase("yes");
+      final boolean doesEngineStartAndDie = engineStartAndDie.equalsIgnoreCase(YES);
       if (doesEngineStartAndDie) {
         readFuelInjection();
-        final boolean hasFuelInjection = carFuelInjection.equalsIgnoreCase("yes");
+        final boolean hasFuelInjection = carFuelInjection.equalsIgnoreCase(YES);
         treatFuelInject(hasFuelInjection);
       }
     }
@@ -74,7 +77,7 @@ public class TroubleshootingCarIssuesPrinter {
   }
 
   private void readCarSilent() throws IOException {
-    if (!this.mustExit) {
+    if (!mustExit) {
       System.out.println("Is the car silent when you turn the key ? ");
       try {
         CarSilent = input.readLine();
@@ -90,7 +93,7 @@ public class TroubleshootingCarIssuesPrinter {
   }
 
   private void readBatteryCorroded() throws IOException {
-    if (!this.mustExit) {
+    if (!mustExit) {
       System.out.println("Are the battery terminals corroded ?");
       try {
         batteryCorroded = input.readLine();
@@ -106,7 +109,7 @@ public class TroubleshootingCarIssuesPrinter {
   }
 
   private void readCareNoise() throws IOException {
-    if (!this.mustExit) {
+    if (!mustExit) {
       System.out.println("Does the car make a clicking noise ? ");
       try {
         carNoise = input.readLine();
@@ -122,7 +125,7 @@ public class TroubleshootingCarIssuesPrinter {
   }
 
   private void readCarCrankUp() throws IOException {
-    if (!this.mustExit) {
+    if (!mustExit) {
       System.out.println("Does the car crank up but fail to start ? ");
       try {
         carCrankUp = input.readLine();
@@ -138,7 +141,7 @@ public class TroubleshootingCarIssuesPrinter {
   }
 
   private void readEngineState() throws IOException {
-    if (!this.mustExit) {
+    if (!mustExit) {
       System.out.println("Does the engine start and then die ? ");
       try {
         engineStartAndDie = input.readLine();
@@ -154,7 +157,7 @@ public class TroubleshootingCarIssuesPrinter {
   }
 
   private void readFuelInjection() throws IOException {
-    if (!this.mustExit) {
+    if (!mustExit) {
       System.out.println("Does your car have fuel injection ? ");
       try {
         carFuelInjection = input.readLine();
@@ -177,7 +180,7 @@ public class TroubleshootingCarIssuesPrinter {
   }
 
   private void validateInput(String inputFromUser) {
-    if (!inputFromUser.equalsIgnoreCase("yes") && !inputFromUser.equalsIgnoreCase("no")) {
+    if (!inputFromUser.equalsIgnoreCase(YES) && !inputFromUser.equalsIgnoreCase(NO)) {
       throw new IllegalArgumentException("Input value should be Yes or No !! ");
     }
   }
