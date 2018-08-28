@@ -1,4 +1,4 @@
-package com.bravedroid.businesslogic;
+package com.bravedroid.businesslogic.utils;
 
 public enum CharType {
   ALPHA,

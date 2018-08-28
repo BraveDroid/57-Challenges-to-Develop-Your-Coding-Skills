@@ -1,9 +1,11 @@
 package com.bravedroid.businesslogic;
 
+import com.bravedroid.businesslogic.utils.CharDetector;
+import com.bravedroid.businesslogic.utils.CharType;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.bravedroid.businesslogic.CharType.*;
+import static com.bravedroid.businesslogic.utils.CharType.*;
 import static org.junit.Assert.*;
 
 public class CharDetectorTest {

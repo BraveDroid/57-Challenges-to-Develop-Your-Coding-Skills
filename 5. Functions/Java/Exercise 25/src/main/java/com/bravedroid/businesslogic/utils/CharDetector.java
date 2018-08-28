@@ -1,15 +1,15 @@
-package com.bravedroid.businesslogic;
+package com.bravedroid.businesslogic.utils;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.bravedroid.businesslogic.CharType.*;
+import static com.bravedroid.businesslogic.utils.CharType.*;
 
 public class CharDetector {
+
   public CharType detectCharType(char character) {
     final String string = Character.toString(character);
     String patternDigit = "(\\d)";
-    String patternAlpha = "(\\w)";
+    String patternAlpha = "(\\p{Alpha})";
     String patternPunct = "(\\p{Punct})";
 
     if (isPatternMatched(string, patternDigit)) return DIGIT;
@@ -18,11 +18,9 @@ public class CharDetector {
     return UNKNOWN;
   }
 
-  private boolean isPatternMatched(String string, String pattern) {
-    Pattern regex = Pattern.compile(pattern);
-    Matcher matcher = regex.matcher(string);
-    return matcher.find();
+  private boolean isPatternMatched(String charString, String patternString) {
+    return Pattern.compile(patternString)
+            .matcher(charString)
+            .find();
   }
 }
-
-
