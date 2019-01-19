@@ -1,5 +1,5 @@
 #Exercises for Programmers
-[57 Challenges to Develop Your Coding Skills](http://https://pragprog.com/book/bhwb/exercises-for-programmers "link")
+[57 Challenges to Develop Your Coding Skills](https://pragprog.com/book/bhwb/exercises-for-programmers "link")
 By **Brian P. Hogan**
 Pages: 118
 Published: 2015-09-15
