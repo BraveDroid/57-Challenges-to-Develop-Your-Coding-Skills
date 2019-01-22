@@ -1,30 +1,70 @@
 package com.bravedroid.businesslogic;
 
 import com.bravedroid.businesslogic.exceptions.BadPasswordFormatException;
+import com.bravedroid.businesslogic.utils.CharAbs;
 import com.bravedroid.businesslogic.utils.CharDetector;
+import com.bravedroid.businesslogic.utils.CharTypeConst;
 
-import static com.bravedroid.businesslogic.utils.CharType.*;
+import java.util.Objects;
 
 public class PasswordStrengthIndicator {
   private String password;
+  private CharDetector charDetector = new CharDetector();
 
   public String indicatePasswordStrength(String password) {
     this.password = password;
-    final CharTypeSumStruct charTypeSumStruct = getSumCharType(password);
+    final CharTypeSumStruct charTypeSumStruct = getSumCharTypeEnum(password);
     return getPasswordComplexityMsg(charTypeSumStruct);
   }
 
-  CharTypeSumStruct getSumCharType(String password) {
+  CharTypeSumStruct getSumCharTypeEnum(String password) {
     char[] passwordArray = password.toCharArray();
     int digitalSum = 0, alphabeticSum = 0, punctSum = 0, unknownSum = 0;
-
-    CharDetector charDetector = new CharDetector();
     for (char c : passwordArray) {
-      if (charDetector.detectCharType(c) == DIGIT) {
+      switch (charDetector.detectCharType(c)) {
+        case DIGIT:
+          digitalSum++;
+          break;
+        case ALPHA:
+          alphabeticSum++;
+          break;
+        case PUNCT:
+          punctSum++;
+          break;
+        default:
+          unknownSum++;
+          break;
+      }
+    }
+    return new CharTypeSumStruct(digitalSum, alphabeticSum, punctSum, unknownSum);
+  }
+
+  CharTypeSumStruct getSumCharTypeConst(String password) {
+    char[] passwordArray = password.toCharArray();
+    int digitalSum = 0, alphabeticSum = 0, punctSum = 0, unknownSum = 0;
+    for (char c : passwordArray) {
+      if (charDetector.detectCharTypeConst(c) == CharTypeConst.DIGIT) {
         digitalSum++;
-      } else if (charDetector.detectCharType(c) == ALPHA) {
+      } else if (charDetector.detectCharTypeConst(c) == CharTypeConst.ALPHA) {
         alphabeticSum++;
-      } else if (charDetector.detectCharType(c) == PUNCT) {
+      } else if (charDetector.detectCharTypeConst(c) == CharTypeConst.PUNCT) {
+        punctSum++;
+      } else {
+        unknownSum++;
+      }
+    }
+    return new CharTypeSumStruct(digitalSum, alphabeticSum, punctSum, unknownSum);
+  }
+
+  CharTypeSumStruct getSumCharTypeObj(String password) {
+    char[] passwordArray = password.toCharArray();
+    int digitalSum = 0, alphabeticSum = 0, punctSum = 0, unknownSum = 0;
+    for (char c : passwordArray) {
+      if (charDetector.detectCharTypeAbs(c) instanceof CharAbs.DigitChar) {
+        digitalSum++;
+      } else if (charDetector.detectCharTypeAbs(c) instanceof CharAbs.AlphaChar) {
+        alphabeticSum++;
+      } else if (charDetector.detectCharTypeAbs(c) instanceof CharAbs.PunctChar) {
         punctSum++;
       } else {
         unknownSum++;
@@ -112,6 +152,11 @@ public class PasswordStrengthIndicator {
       this.alphabeticSum = alphabeticSum;
       this.punctSum = punctSum;
       this.unknownSum = unknownSum;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(digitalSum, alphabeticSum, punctSum, unknownSum);
     }
 
     @Override
