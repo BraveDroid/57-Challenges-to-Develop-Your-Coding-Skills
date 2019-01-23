@@ -14,7 +14,7 @@ public class CharDetectorTest {
   private CharDetector SUT;
 
   @Before
-  public void setUp()  {
+  public void setUp() {
     SUT = new CharDetector();
   }
 

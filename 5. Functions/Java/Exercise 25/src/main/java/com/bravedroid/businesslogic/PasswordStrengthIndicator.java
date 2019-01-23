@@ -1,23 +1,15 @@
 package com.bravedroid.businesslogic;
 
-import com.bravedroid.businesslogic.exceptions.BadPasswordFormatException;
-import com.bravedroid.businesslogic.utils.CharAbs;
-import com.bravedroid.businesslogic.utils.CharDetector;
-import com.bravedroid.businesslogic.utils.CharTypeConst;
+import com.bravedroid.businesslogic.utils.*;
 
-import java.util.Objects;
+import static com.bravedroid.businesslogic.utils.PasswordComplexity.*;
 
 public class PasswordStrengthIndicator {
   private String password;
   private CharDetector charDetector = new CharDetector();
 
-  public String indicatePasswordStrength(String password) {
+  public CharTypeSumStruct getSumCharTypeEnum(String password) {
     this.password = password;
-    final CharTypeSumStruct charTypeSumStruct = getSumCharTypeEnum(password);
-    return getPasswordComplexityMsg(charTypeSumStruct);
-  }
-
-  CharTypeSumStruct getSumCharTypeEnum(String password) {
     char[] passwordArray = password.toCharArray();
     int digitalSum = 0, alphabeticSum = 0, punctSum = 0, unknownSum = 0;
     for (char c : passwordArray) {
@@ -39,6 +31,7 @@ public class PasswordStrengthIndicator {
     return new CharTypeSumStruct(digitalSum, alphabeticSum, punctSum, unknownSum);
   }
 
+  //new variant of logic based on constant variables
   CharTypeSumStruct getSumCharTypeConst(String password) {
     char[] passwordArray = password.toCharArray();
     int digitalSum = 0, alphabeticSum = 0, punctSum = 0, unknownSum = 0;
@@ -56,6 +49,7 @@ public class PasswordStrengthIndicator {
     return new CharTypeSumStruct(digitalSum, alphabeticSum, punctSum, unknownSum);
   }
 
+  //new variant of logic based on obj
   CharTypeSumStruct getSumCharTypeObj(String password) {
     char[] passwordArray = password.toCharArray();
     int digitalSum = 0, alphabeticSum = 0, punctSum = 0, unknownSum = 0;
@@ -73,37 +67,24 @@ public class PasswordStrengthIndicator {
     return new CharTypeSumStruct(digitalSum, alphabeticSum, punctSum, unknownSum);
   }
 
-  String getPasswordComplexityMsg(CharTypeSumStruct vm) {
-    StringBuilder messageToPrint = new StringBuilder();
+  public PasswordComplexity getPasswordComplexity(CharTypeSumStruct vm) {
     if (isVeryWeakPassword(vm)) {
-      messageToPrint.append("The password ")
-              .append("\'")
-              .append(password)
-              .append("\'")
-              .append(" is a very weak password.");
-    } else if (isWeakPassword(vm)) {
-      messageToPrint.append("The password ")
-              .append("\'")
-              .append(password)
-              .append("\'")
-              .append(" is a weak password.");
-    } else if (isStrongPassword(vm)) {
-      messageToPrint.append("The password ")
-              .append("\'").append(password)
-              .append("\'")
-              .append(" is a strong password.");
-    } else if (isVeryStrongPassword(vm)) {
-      messageToPrint.append("The password ")
-              .append("\'")
-              .append(password)
-              .append("\'")
-              .append(" is a very strong password.");
-    } else if (vm.unknownSum > 0) {
-      messageToPrint.append(" unknownSum character entered !!! ");
-    } else {
-      throw new BadPasswordFormatException("Invalid Password Format");
+      return VERY_WEAK_PASSWORD;
     }
-    return messageToPrint.toString();
+    if (isWeakPassword(vm)) {
+      return WEAK_PASSWORD;
+    }
+    if (isStrongPassword(vm)) {
+      return STRONG_PASSWORD;
+    }
+    if (isVeryStrongPassword(vm)) {
+      return VERY_STRONG_PASSWORD;
+    }
+    if (haveUnknownCharacter(vm)) {
+      return UNKNOWN_CHARACTER_PASSWORD;
+    }
+    // crashes for some example like 123123123
+    throw new RuntimeException("Password complexity is not known ");
   }
 
   private boolean isVeryStrongPassword(CharTypeSumStruct vm) {
@@ -138,34 +119,12 @@ public class PasswordStrengthIndicator {
             password.length() < 8;
   }
 
-  /***
-   *my Struct used to encapsulate the count of each CharType
-   */
-  static class CharTypeSumStruct {
-    int digitalSum;
-    int alphabeticSum;
-    int punctSum;
-    int unknownSum;
+  private boolean haveUnknownCharacter(CharTypeSumStruct vm) {
+    return vm.unknownSum > 0;
+  }
 
-    CharTypeSumStruct(int digitalSum, int alphabeticSum, int punctSum, int unknownSum) {
-      this.digitalSum = digitalSum;
-      this.alphabeticSum = alphabeticSum;
-      this.punctSum = punctSum;
-      this.unknownSum = unknownSum;
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hash(digitalSum, alphabeticSum, punctSum, unknownSum);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-      return (other instanceof CharTypeSumStruct) &&
-              this.alphabeticSum == ((CharTypeSumStruct) other).alphabeticSum &&
-              this.digitalSum == ((CharTypeSumStruct) other).digitalSum &&
-              this.punctSum == ((CharTypeSumStruct) other).punctSum &&
-              this.unknownSum == ((CharTypeSumStruct) other).unknownSum;
-    }
+  //Visible for testing
+  void setPassword(String password) {
+    this.password = password;
   }
 }
