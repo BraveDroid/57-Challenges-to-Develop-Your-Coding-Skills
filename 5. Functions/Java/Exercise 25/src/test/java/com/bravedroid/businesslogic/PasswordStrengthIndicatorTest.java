@@ -1,5 +1,6 @@
 package com.bravedroid.businesslogic;
 
+import com.bravedroid.businesslogic.exceptions.BadPasswordFormatException;
 import com.bravedroid.businesslogic.utils.CharTypeSumStruct;
 import com.bravedroid.businesslogic.utils.PasswordComplexity;
 import org.junit.Before;
@@ -22,5 +23,11 @@ public class PasswordStrengthIndicatorTest {
     PasswordComplexity result = SUT.getPasswordComplexity(vm);
     PasswordComplexity expected = PasswordComplexity.VERY_WEAK_PASSWORD;
     assertEquals(expected, result);
+  }
+  @Test(expected = RuntimeException.class)
+  public void getPasswordComplexity_invalidInput_exceptionExpected(){
+    SUT.setPassword("123123123");
+    CharTypeSumStruct vm = new CharTypeSumStruct(9, 0, 0, 0);
+    SUT.getPasswordComplexity(vm);
   }
 }

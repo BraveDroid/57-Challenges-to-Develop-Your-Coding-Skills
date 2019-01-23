@@ -13,7 +13,6 @@ public class PasswordStrengthIndicatorPrinter {
   private String password;
 
   private PasswordStrengthIndicator passwordStrengthIndicator;
-  private CharTypeSumStruct vm;
 
   public PasswordStrengthIndicatorPrinter(PasswordStrengthIndicator passwordStrengthIndicator) {
     this.passwordStrengthIndicator = passwordStrengthIndicator;
@@ -34,10 +33,9 @@ public class PasswordStrengthIndicatorPrinter {
   }
 
   private String indicatePasswordStrength(String password) {
-    this.password = password;
-    vm = passwordStrengthIndicator.getSumCharTypeEnum(password);
+    CharTypeSumStruct vm = passwordStrengthIndicator.getSumCharTypeEnum(password);
 
-    return getPasswordComplexityMsg();
+    return getPasswordComplexityMsg(vm);
   }
 
   public void printPasswordStrengthIndicator() {
@@ -50,7 +48,7 @@ public class PasswordStrengthIndicatorPrinter {
     }
   }
 
-  private String getPasswordComplexityMsg() {
+  private String getPasswordComplexityMsg(CharTypeSumStruct vm) {
     StringBuilder messageToPrint = new StringBuilder();
     switch (passwordStrengthIndicator.getPasswordComplexity(vm)) {
       case VERY_WEAK_PASSWORD:

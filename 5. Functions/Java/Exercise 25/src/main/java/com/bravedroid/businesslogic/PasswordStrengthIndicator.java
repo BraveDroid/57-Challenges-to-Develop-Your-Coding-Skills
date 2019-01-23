@@ -9,7 +9,6 @@ public class PasswordStrengthIndicator {
   private CharDetector charDetector = new CharDetector();
 
   public CharTypeSumStruct getSumCharTypeEnum(String password) {
-    this.password = password;
     char[] passwordArray = password.toCharArray();
     int digitalSum = 0, alphabeticSum = 0, punctSum = 0, unknownSum = 0;
     for (char c : passwordArray) {
