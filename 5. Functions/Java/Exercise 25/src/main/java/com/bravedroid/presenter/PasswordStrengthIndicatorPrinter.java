@@ -50,7 +50,7 @@ public class PasswordStrengthIndicatorPrinter {
 
   private String getPasswordComplexityMsg(CharTypeSumStruct vm) {
     StringBuilder messageToPrint = new StringBuilder();
-    switch (passwordStrengthIndicator.getPasswordComplexity(vm)) {
+    switch (passwordStrengthIndicator.getPasswordComplexity(vm,password)) {
       case VERY_WEAK_PASSWORD:
         messageToPrint.append("The password ")
                 .append("\'")

@@ -18,16 +18,14 @@ public class PasswordStrengthIndicatorTest {
 
   @Test
   public void getPasswordComplexity_ObjectInput_ReturnEnum() {
-    SUT.setPassword("1234557");
     CharTypeSumStruct vm = new CharTypeSumStruct(7, 0, 0, 0);
-    PasswordComplexity result = SUT.getPasswordComplexity(vm);
+    PasswordComplexity result = SUT.getPasswordComplexity(vm,"1234557");
     PasswordComplexity expected = PasswordComplexity.VERY_WEAK_PASSWORD;
     assertEquals(expected, result);
   }
   @Test(expected = RuntimeException.class)
   public void getPasswordComplexity_invalidInput_exceptionExpected(){
-    SUT.setPassword("123123123");
     CharTypeSumStruct vm = new CharTypeSumStruct(9, 0, 0, 0);
-    SUT.getPasswordComplexity(vm);
+    SUT.getPasswordComplexity(vm,"123123123");
   }
 }
