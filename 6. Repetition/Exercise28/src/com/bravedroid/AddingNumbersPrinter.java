@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 class AddingNumbersPrinter {
-  private int numberFromUser;
-  private boolean mustExit;
   private BufferedReader input;
 
   AddingNumbersPrinter() {
@@ -14,27 +12,22 @@ class AddingNumbersPrinter {
   }
 
   void readNumber() throws IOException {
-    int sum = numberFromUser;
+    int sum = 0;
     int i = 0;
     while (i < 5) {
-      if (mustExit) {
-        return;
-      }
+      System.out.println("i: "+i);
       System.out.println("Enter A Number : ");
       String inputFromUser = input.readLine();
-
       if (mustExit(inputFromUser)) {
-        mustExit = true;
-      } else if (!isValidInput(inputFromUser)) {
-        readNumber();
-      } else if (isValidInput(inputFromUser)) {
-        numberFromUser = Integer.parseInt(inputFromUser);
-        sum += numberFromUser;
+        return;
       }
-      i++;
+      if (isValidInput(inputFromUser)) {
+        int numberFromUser = Integer.parseInt(inputFromUser);
+        sum += numberFromUser;
+        i++;
+      }
     }
     System.out.println("The Total is " + sum);
-    mustExit = true;
   }
 
   private boolean isValidInput(String number) {
@@ -50,7 +43,6 @@ class AddingNumbersPrinter {
   }
 
   private boolean mustExit(String userInput) {
-    mustExit = userInput.equals("exit");
-    return mustExit;
+    return userInput.equals("exit");
   }
 }
