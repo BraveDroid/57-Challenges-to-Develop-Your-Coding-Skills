@@ -17,7 +17,8 @@ class AddingNumbersPrinter {
     int sum = 0;
     int i = 0;
     do {
-      System.out.println("i: " + i);
+      //useful for debug
+      //System.out.println("i: " + i);
       System.out.println("Enter A Number : ");
       inputFromUser = input.readLine();
       if (mustExit(inputFromUser)) {
@@ -34,7 +35,8 @@ class AddingNumbersPrinter {
   //variant with for()
   void readNumber1() throws IOException {
     for (int i = 0; i < 5; i = incrementValue(i)) {
-      System.out.println("i: " + i);
+      //useful for debug
+      //System.out.println("i: " + i);
       System.out.println("Enter A Number : ");
       inputFromUser = input.readLine();
       if (mustExit(inputFromUser)) {
@@ -58,7 +60,8 @@ class AddingNumbersPrinter {
     int sum = 0;
     int i = 0;
     while (i < 5) {
-      System.out.println("i: " + i);
+      //useful for debug
+      //System.out.println("i: " + i);
       System.out.println("Enter A Number : ");
       inputFromUser = input.readLine();
       if (mustExit(inputFromUser)) {
