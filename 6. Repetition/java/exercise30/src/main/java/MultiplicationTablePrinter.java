@@ -4,11 +4,9 @@ public class MultiplicationTablePrinter {
 
   // variant with for loop
   void multipleTable() {
-    int i;
-    int j;
     int num = 0;
-    for (i = 0; i < x.length; i++) {
-      for (j = 0; j < y.length; j++) {
+    for (int i = 0; i < x.length; i++) {
+      for (int j = 0; j < y.length; j++) {
         num = x[i] * y[j];
         System.out.println(i + " X " + j + " = " + num);
       }
