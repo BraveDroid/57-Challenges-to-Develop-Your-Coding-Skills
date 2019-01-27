@@ -12,6 +12,11 @@ public class KarvonenHeartRatePrinter {
     input = new BufferedReader(new InputStreamReader(System.in));
   }
 
+  private static void printTableHeader() {
+    System.out.println("Intensity     | Rate  ");
+    System.out.println("--------------|------- ");
+  }
+
   void readAge() throws IOException {
     if (mustExit) {
       return;
@@ -42,23 +47,18 @@ public class KarvonenHeartRatePrinter {
     if (mustExit) {
       return;
     }
+    printTableHeader();
+    printTableBody();
+  }
 
-    int age = 0;
-    int heartRate = 0;
-    int targetHeartRate;
-    if (isNumeric(ageFromUser) && isNumeric(heartRateFromUser)) {
-      age = Integer.parseInt(ageFromUser);
-      heartRate = Integer.parseInt(heartRateFromUser);
-    }
-    if (!mustExitMethod(ageFromUser) || !mustExitMethod(heartRateFromUser)) {
-      System.out.println("Intensity     | Rate  ");
-      System.out.println("--------------|------- ");
-      for (int intensity = 55; intensity <= 95; intensity += 5) {
-        float intensityPercentage = (float) intensity / 100;
-        //formula target heart rate
-        targetHeartRate = (int) ((((220 - age) - heartRate) * intensityPercentage) + heartRate);
-        System.out.println(intensity + " % " + "         | " + targetHeartRate + " bpm");
-      }
+  private void printTableBody() {
+    int age = Integer.parseInt(ageFromUser);
+    int heartRate = Integer.parseInt(heartRateFromUser);
+    for (int intensity = 55; intensity <= 95; intensity += 5) {
+      float intensityPercentage = (float) intensity / 100;
+      //formula target heart rate
+      int targetHeartRate = (int) ((((220 - age) - heartRate) * intensityPercentage) + heartRate);
+      System.out.println(intensity + " % " + "         | " + targetHeartRate + " bpm");
     }
   }
 
