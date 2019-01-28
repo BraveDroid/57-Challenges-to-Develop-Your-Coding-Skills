@@ -1,14 +1,16 @@
+package com.bravedroid;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class KarvonenHeartRatePrinter {
+public class KarvonenHeartRateInfiniteLoopPrinter implements KarvonenHeartRatePrinter {
   private boolean mustExit;
   private String ageFromUser;
   private String heartRateFromUser;
   private BufferedReader input;
 
-  KarvonenHeartRatePrinter() {
+  KarvonenHeartRateInfiniteLoopPrinter() {
     input = new BufferedReader(new InputStreamReader(System.in));
   }
 
@@ -17,33 +19,46 @@ public class KarvonenHeartRatePrinter {
     System.out.println("--------------|------- ");
   }
 
-  void readAge() throws IOException {
+  public void readAge() throws IOException {
+    while (true) {
+      promptForAge();
+      if (mustExitMethod(ageFromUser)) {
+        mustExit = true;
+        return;
+      }
+      if (isNumeric(ageFromUser) | mustExit) {
+        break;
+      }
+    }
+  }
+
+  public void readHeartRate() throws IOException {
     if (mustExit) {
       return;
     }
+    while (true) {
+      promptHeartRate();
+      if (mustExitMethod(heartRateFromUser)) {
+        mustExit = true;
+        return;
+      }
+      if (isNumeric(heartRateFromUser) | mustExit) {
+        break;
+      }
+    }
+  }
+
+  private void promptForAge() throws IOException {
     System.out.println("Enter your age .");
     ageFromUser = input.readLine();
-    if (mustExitMethod(ageFromUser)) {
-      mustExit = true;
-    } else if (!isNumeric(ageFromUser)) {
-      readAge();
-    }
   }
 
-  void readHeartRate() throws IOException {
-    if (mustExit) {
-      return;
-    }
+  private void promptHeartRate() throws IOException {
     System.out.println("Enter your resting heart rate.");
     heartRateFromUser = input.readLine();
-    if (mustExitMethod(heartRateFromUser)) {
-      mustExit = true;
-    } else if (!isNumeric(heartRateFromUser)) {
-      readHeartRate();
-    }
   }
 
-  void printHeartRate() {
+  public void printHeartRate() {
     if (mustExit) {
       return;
     }
