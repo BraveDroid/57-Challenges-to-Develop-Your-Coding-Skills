@@ -3,17 +3,17 @@ package com.bravedroid;
 import java.io.IOException;
 
 public interface KarvonenHeartRatePrinter {
-  int RECURSION = 1;
-  int INFINITE_LOOP = 0;
+  int RECURSION = 0;
+  int INFINITE_LOOP = 1;
 
   static KarvonenHeartRatePrinter create(int strategyCode) {
-    KarvonenHeartRatePrinter karvonenHeartRatePrinter = null;
     if (strategyCode == RECURSION) {
-      karvonenHeartRatePrinter = new KarvonenHeartRateRecursivePrinter();
-    } else if (strategyCode == INFINITE_LOOP) {
-      karvonenHeartRatePrinter = new KarvonenHeartRateInfiniteLoopPrinter();
+      return new KarvonenHeartRateRecursivePrinter();
     }
-    return karvonenHeartRatePrinter;
+    if (strategyCode == INFINITE_LOOP) {
+      return new KarvonenHeartRateInfiniteLoopPrinter();
+    }
+    throw new IllegalArgumentException("UNKNOWN STRATEGY");
   }
 
   void readAge() throws IOException;
