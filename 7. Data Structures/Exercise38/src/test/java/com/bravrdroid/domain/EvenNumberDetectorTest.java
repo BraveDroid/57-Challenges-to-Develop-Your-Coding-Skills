@@ -6,11 +6,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertArrayEquals;
 
 public class EvenNumberDetectorTest {
-  private EvenNumberDetector SUT;
+  private EvenNumberFilter SUT;
 
   @Before
   public void setUp() {
-    SUT = new EvenNumberDetector();
+    SUT = new EvenNumberFilter();
   }
 
   @Test

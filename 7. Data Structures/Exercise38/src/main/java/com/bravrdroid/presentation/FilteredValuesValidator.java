@@ -1,23 +1,22 @@
 package com.bravrdroid.presentation;
 
-import com.bravrdroid.domain.EvenNumberDetector;
+import com.bravrdroid.domain.EvenNumberFilter;
 import com.bravrdroid.util.Logger;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.bravrdroid.util.InputValidator.*;
 
-public class FilteredValuesPrinter {
-  private String inputTextFromUser;
-  private EvenNumberDetector evenNumberDetector;
-  private Logger logger;
+public class FilteredValuesValidator {
+  private final ReaderCmd reader;
+  private final EvenNumberFilter evenNumberFilter;
+  private final Logger logger;
 
-  public FilteredValuesPrinter(EvenNumberDetector theEvenNumberDetector, Logger logger) {
-    this.evenNumberDetector = theEvenNumberDetector;
+  public FilteredValuesValidator(ReaderCmd reader, EvenNumberFilter evenNumberFilter, Logger logger) {
+    this.reader = reader;
+    this.evenNumberFilter = evenNumberFilter;
     this.logger = logger;
   }
 
@@ -35,10 +34,10 @@ public class FilteredValuesPrinter {
     return false;
   }
 
-  public void printEvenNumbers() throws IOException {
-    int[] ints = null;
+  public String printEvenNumbers() throws IOException {
+    int[] ints;
     while (true) {
-      String inputStringFromUSer = readInputFromUser();
+      String inputStringFromUSer = reader.read();
       try {
         ints = validateInput(inputStringFromUSer);
       } catch (WrongInputException ex) {
@@ -46,17 +45,10 @@ public class FilteredValuesPrinter {
       }
       break;
     }
-    final int[] evenNumbers = evenNumberDetector.filterEvenNumbers(ints);
-    System.out.println(concatenateArray(evenNumbers));
+    final int[] evenNumbers = evenNumberFilter.filterEvenNumbers(ints);
+    return concatenateArray(evenNumbers);
   }
 
-  private String readInputFromUser() throws IOException {
-    BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-    System.out.println("Enter a list of numbers, separated by spaces: ");
-    inputTextFromUser = input.readLine();
-    return inputTextFromUser;
-
-  }
 
   /*package*/ int[] validateInput(String inputFromUser) {
     if (mustExitMethod(inputFromUser)) throw new MustExitException();
@@ -92,7 +84,8 @@ public class FilteredValuesPrinter {
     for (int item : passwordInCharsArray) {
       password.append(String.valueOf(item)).append(" ");
     }
-    return password.toString();
+    return password.toString().trim();
   }
+
 }
 
