@@ -26,7 +26,7 @@ public class RecordsSorterLogicTest {
   public void sortRecordsTest_peopleListEntered_PeopleSortedListIsEntered() {
     final Map<String, List<Employee>> peopleLists = createPeopleLists();
     final List<Employee> employeeListInput = peopleLists.get("FIRST");
-    final List<Employee> sortedResult = SUT.sortRecords(employeeListInput);
+    final List<Employee> sortedResult = SUT.sortListOfEmployees(employeeListInput);
     final List<Employee> sortedExpected = peopleLists.get("SECOND");
     assertThat(sortedResult, is(equalTo(sortedExpected)));
   }

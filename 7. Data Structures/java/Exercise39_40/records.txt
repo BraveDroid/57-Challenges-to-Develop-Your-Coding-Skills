@@ -1,0 +1,6 @@
+Jacquelyn Jackson   | DBA                 |
+Jake Jacobson       | Programmer          |
+John Johnson        | Manager             | 2016-12-31
+Sally Weber         | Web Developer       | 2015-12-18
+Tou Xiong           | Software Engineer   | 2016-10-05
+Michaela Michaelson | District Manager    | 2015-12-19
