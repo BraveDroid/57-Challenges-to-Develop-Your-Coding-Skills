@@ -31,7 +31,7 @@ public class CmdConsoleRepository implements Repository {
         break;
       }
       i++;
-      String inputFromUser = reader.readInput();
+      String inputFromUser = reader.readInput("Enter employee records as follow : FirstName LastName Position SuppressionDate");
       if (mustExitMethod(inputFromUser)) {
         throw new MustExitException();
       } else if (isBlank(inputFromUser)) {
@@ -40,7 +40,7 @@ public class CmdConsoleRepository implements Repository {
         Printer.print("Inputs must be separated by whitespace");
       } else {
         final String[] inputArray = inputFromUser.trim().split(" ");
-        if (!hasNecessaryData(inputArray)) {
+        if (!hasNecessaryData(inputArray)&& !inputFromUser.equals("done")) {
           Printer.print("invalid input you must enter at least 3 data");
         } else if (hasNecessaryData(inputArray)) {
           switch (inputArray.length) {
@@ -52,7 +52,7 @@ public class CmdConsoleRepository implements Repository {
               break;
           }
         }
-        if (employeeList.size() > 1 && inputFromUser.equals("done")) {
+        if (employeeList.size() >= 1 && inputFromUser.equals("done")) {
           break;
         }
       }

@@ -30,7 +30,7 @@ public class ValidateInput {
       super("user requested exit exception");
     }
   }
-  public static class WrongInputException extends RuntimeException {
+  public static class WrongInputException extends IllegalArgumentException {
     public WrongInputException() {
       super("Bad inputs exception");
     }

@@ -7,10 +7,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ReaderCmd {
- public String readInput() throws IOException {
+  public String readInput(String msgToPrompt) throws IOException {
     BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-    Printer.print("Enter employee records as follow : FirstName LastName Position SuppressionDate");
+    Printer.print(msgToPrompt);
     return input.readLine();
   }
-
 }

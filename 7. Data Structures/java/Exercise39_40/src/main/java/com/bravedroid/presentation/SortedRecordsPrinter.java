@@ -98,7 +98,6 @@ public class SortedRecordsPrinter {
     this.employeeListOfArraysOfEmployeeArrays = employeeListOfArraysOfEmployeeArrays;
   }
 
-
   public void printSortedResultListEmployee() {
     printHeader();
     final List<Employee> list = sorter.sortListOfEmployees(employeeList);
@@ -169,7 +168,7 @@ public class SortedRecordsPrinter {
     printHeader();
     final List<EmployeeArray> sortListOfMaps = sorter.sortListOfEmployeeArrayList(employeeListOfArraysOfEmployeeArrays);
     for (EmployeeArray item : sortListOfMaps) {
-      final String name = format(item.getFirstName() + " " +item.getLastName());
+      final String name = format(item.getFirstName() + " " + item.getLastName());
       final String position = format(item.getPosition());
       final String suppressionDate = format(item.getSuppressionDate());
       Printer.print(name + "| " + position + "| " + suppressionDate);

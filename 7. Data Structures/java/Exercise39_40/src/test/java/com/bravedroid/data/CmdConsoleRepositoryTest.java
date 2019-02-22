@@ -29,7 +29,7 @@ public class CmdConsoleRepositoryTest {
 
   @Test
   public void getRecordsTest_returnList() throws IOException {
-    when(readerMock.readInput()).thenReturn("julia kk cto");
+    when(readerMock.readInput("Enter employee records as follow : FirstName LastName Position SuppressionDate")).thenReturn("julia kk cto");
     final List<Employee> result = SUT.getRecords(5);
     List<Employee> expectedList = new ArrayList<>();
     expectedList.add(new Employee("julia", "kk", "cto", ""));
@@ -42,7 +42,7 @@ public class CmdConsoleRepositoryTest {
 
   @Test
   public void getRecords_returnEmptyList() throws IOException {
-    when(readerMock.readInput()).thenReturn("");
+    when(readerMock.readInput("Enter employee records as follow : FirstName LastName Position SuppressionDate")).thenReturn("");
     final List<Employee> result = SUT.getRecords(1);
     List<String[]> expected = new ArrayList<>() ;
     assertThat(result, is(equalTo(expected)));
@@ -50,7 +50,7 @@ public class CmdConsoleRepositoryTest {
 
   @Test
   public void getRecords_returnEmptyArrayOfStringInList () throws IOException {
-    when(readerMock.readInput()).thenReturn("julia ");
+    when(readerMock.readInput("Enter employee records as follow : FirstName LastName Position SuppressionDate")).thenReturn("julia ");
     final List<Employee> result = SUT.getRecords(1);
     List<String[]> expected = new ArrayList<>() ;
     assertThat(result, is(equalTo(expected)));
